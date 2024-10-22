@@ -5,6 +5,7 @@ import { Dropdown } from 'react-native-element-dropdown'
 import colors from '@/constants/colors'
 import { useOnboarding } from '@/context/onboardingContext'
 import { Href, router } from 'expo-router'
+import Toast from 'react-native-toast-message'
 
 const schoolLevels = [
     {label: 'Primary', value: '1'},
@@ -16,6 +17,14 @@ const School = () => {
     const [value, setValue] = useState('');
 
     const MoveToNextSection = () => {
+        if (!value) {
+            Toast.show({
+                type: 'error',
+                text1: 'Error',
+                text2: 'Please select a school level'
+            })
+            return
+        }
         // TODO: Add school level to user profile
         router.push('/(onboarding)/Grade' as Href)
     }

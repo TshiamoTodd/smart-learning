@@ -5,6 +5,7 @@ import colors from '@/constants/colors';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Href, router } from 'expo-router';
 import { useOnboarding } from '@/context/onboardingContext';
+import Toast from 'react-native-toast-message';
 
 const primaryGradeLevels = [
   {label: 'Grade 1 - 3', value: '1'},
@@ -22,12 +23,19 @@ const Grade = () => {
   const [value, setValue] = useState('');
 
   const MoveToNextSection = () => {
-    console.log({value})
+    if (!value) {
+        Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: 'Please select a grade level'
+        })
+        return
+    }
     // TODO: Add school level to user profile
     router.push('/(onboarding)/Subjects' as Href)
 }
   return (
-    <SafeAreaView 
+      <SafeAreaView 
                 style={{backgroundColor: colors.PRIMARY}}
                 className='flex h-full items-center justify-between py-3 pb-10'
             >
@@ -62,22 +70,22 @@ const Grade = () => {
                 </View>
             </View>
 
-                <View className='w-full gap-y-5 flex flex-col items-center'>
-                    <TouchableOpacity
-                        className='flex items-center justify-center bg-white px-4 p-4 rounded-full mt-[-25%] w-[70%]' 
-                        onPress={() => MoveToNextSection()}
-                        onPressIn={() => setGradeRange(value)}
+            <View className='w-full gap-y-5 flex flex-col items-center'>
+                <TouchableOpacity
+                    className='flex items-center justify-center bg-white px-4 p-4 rounded-full mt-[-25%] w-[70%]' 
+                    onPress={() => MoveToNextSection()}
+                    onPressIn={() => setGradeRange(value)}
+                >
+                    <Text
+                        style={{color: colors.PRIMARY}}
+                        className='font-bold text-lg'
                     >
-                        <Text
-                            style={{color: colors.PRIMARY}}
-                            className='font-bold text-lg'
-                        >
-                            Next
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </SafeAreaView>
-  )
+                        Next
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
+    )
 }
 
 export default Grade
