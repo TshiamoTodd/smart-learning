@@ -12,15 +12,10 @@ const schoolLevels = [
 ]
 
 const School = () => {
-    const {setSchoolLevel, schoolLevel} = useOnboarding()
+    const {setSchoolLevel} = useOnboarding()
     const [value, setValue] = useState('');
 
     const MoveToNextSection = () => {
-        setSchoolLevel(value)
-        
-        console.log("School Level", schoolLevel)
-        
-
         // TODO: Add school level to user profile
         router.push('/(onboarding)/Grade' as Href)
     }

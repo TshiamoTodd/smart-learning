@@ -4,20 +4,27 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '@/constants/colors';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Href, router } from 'expo-router';
+import { useOnboarding } from '@/context/onboardingContext';
 
-const gradeLevels = [
+const primaryGradeLevels = [
   {label: 'Grade 1 - 3', value: '1'},
   {label: 'Grade 4 - 6', value: '2'},
   {label: 'Grade 7', value: '3'},
 ]
+const secondaryGradeLevels = [
+  {label: 'Grade 8 - 9', value: '1'},
+  {label: 'Grade 10 - 12', value: '2'},
+  {label: 'Grade 12', value: '3'},
+]
 
 const Grade = () => {
+  const {schoolLevel, setGradeRange} = useOnboarding()
   const [value, setValue] = useState('');
 
   const MoveToNextSection = () => {
     console.log({value})
     // TODO: Add school level to user profile
-    // router.push('/(onboarding)/Grade' as Href)
+    router.push('/(onboarding)/Subjects' as Href)
 }
   return (
     <SafeAreaView 
@@ -40,7 +47,7 @@ const Grade = () => {
                         placeholderStyle={styles.placeholderStyle}
                         selectedTextStyle={styles.selectedTextStyle}
                         inputSearchStyle={styles.inputSearchStyle}
-                        data={gradeLevels}
+                        data={schoolLevel === '1' ? primaryGradeLevels : secondaryGradeLevels}
                         search
                         maxHeight={300}
                         labelField="label"
@@ -59,6 +66,7 @@ const Grade = () => {
                     <TouchableOpacity
                         className='flex items-center justify-center bg-white px-4 p-4 rounded-full mt-[-25%] w-[70%]' 
                         onPress={() => MoveToNextSection()}
+                        onPressIn={() => setGradeRange(value)}
                     >
                         <Text
                             style={{color: colors.PRIMARY}}
