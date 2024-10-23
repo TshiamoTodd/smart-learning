@@ -59,7 +59,6 @@ const School = () => {
                         searchPlaceholder="Search..."
                         value={value}
                         onChange={item => {
-                            console.log(value)
                             setValue(item.value);
                         }}
                     />

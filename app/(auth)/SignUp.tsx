@@ -14,7 +14,6 @@ const SignUp = () => {
 
     const SignUp = () => {
         console.log('Signing up')
-        console.log({name, email, phoneNumber, password, confirmPassword})
 
         //TODO: Implement sign up
         if (password === confirmPassword) {

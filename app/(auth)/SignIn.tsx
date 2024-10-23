@@ -10,7 +10,6 @@ const SignIn = () => {
 
     const SignIn = () => {
         console.log('Signing in')
-        console.log({email, password})
 
         const data = {
             email,

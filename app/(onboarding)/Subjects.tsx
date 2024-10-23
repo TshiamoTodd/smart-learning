@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import colors from '@/constants/colors'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Checkbox from 'expo-checkbox';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const Subjects = () => {
   const [isChecked, setChecked] = useState(false);
@@ -23,8 +24,15 @@ const Subjects = () => {
                         What is your Grade range?
                     </Text>
                     <View className='flex w-full flex-row gap-x-10'>
-                      <Checkbox  value={isChecked} onValueChange={setChecked} />
-                      <Text>Normal checkbox</Text>
+                    <BouncyCheckbox
+                        size={25}
+                        fillColor="black"
+                        unFillColor="#FFFFFF"
+                        text="Custom Checkbox"
+                        iconStyle={{ borderColor: "grey" }}
+                        innerIconStyle={{ borderWidth: 2 }}
+                        onPress={(isChecked: boolean) => {console.log(isChecked)}}
+                    />
                     </View>
                 </View>
             </View>
